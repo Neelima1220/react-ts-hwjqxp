@@ -5,10 +5,9 @@ import { Data } from './data';
 
 export default function App() {
   const [dataT, setDataT] = useState(Data);
-  // const [cur, setCur] = useState(0);
-  const [selected, setSelected] = useState();
-  console.log(selected, 'selected');
+  const [selectedId, setSelectedId] = useState();
 
+  const selected = dataT.find((user) => user.id === selectedId);
   const handleClick = (idx) => {
     const tempData = cloneDeep(dataT);
     const n = tempData.map((item) => {
@@ -22,8 +21,7 @@ export default function App() {
   };
 
   const handleSelected = (idx) => {
-    console.log(idx);
-    setSelected(dataT[idx - 1]);
+    setSelectedId(idx);
   };
   return (
     <div>
@@ -34,7 +32,7 @@ export default function App() {
         } years old`}
       </h1>
       {dataT &&
-        dataT.map((item, index) => (
+        dataT.map((item) => (
           <div
             style={{
               display: 'flex',
