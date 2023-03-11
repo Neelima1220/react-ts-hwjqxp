@@ -7,7 +7,8 @@ export default function App() {
   const [dataT, setDataT] = useState(Data);
   const [selectedId, setSelectedId] = useState();
 
-  const selected = dataT.find((user) => user.id === selectedId);
+  const selectedUser = dataT.find((item) => item.id === selectedId);
+
   const handleClick = (idx) => {
     const tempData = cloneDeep(dataT);
     const n = tempData.map((item) => {
@@ -19,17 +20,19 @@ export default function App() {
     });
     setDataT(n);
   };
+  console.log(selectedUser, 'selectedUserselectedUser');
 
   const handleSelected = (idx) => {
     setSelectedId(idx);
+    // setSelectedUser(dataT.find((item) => item.id === idx));
   };
   return (
     <div>
       <h1>
-        Selected user :{' '}
-        {`${selected?.name || dataT[0].name} is ${
-          selected?.age || dataT[0].age
-        } years old`}
+        Selected user :
+        {selectedUser
+          ? `${selectedUser?.name} is ${selectedUser?.age} years old`
+          : 'none'}
       </h1>
       {dataT &&
         dataT.map((item) => (
